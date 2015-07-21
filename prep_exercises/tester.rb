@@ -1,9 +1,13 @@
-def fibonacci(number)
-  if number < 2
-    number
+words =  ['demo', 'none', 'tied', 'evil', 'dome', 'mode', 'live',
+          'fowl', 'veil', 'wolf', 'diet', 'vile', 'edit', 'tide',
+          'flow', 'neon']
+anagrams = {}
+words.each do |word|
+  key = word.split('').sort.join.to_sym
+  if anagrams.has_key?(key)
+    anagrams[key] << word
   else
-    fibonacci(number - 1) + fibonacci(number - 2)
+    anagrams[key] = [word]
   end
 end
-
-puts fibonacci(6)
+anagrams.each {|key, words| print words; puts}
