@@ -22,6 +22,7 @@ end
 # answer to question one is FALSE
 # answer to question two is 'Did you get it right?'
 # answer to question three is 'Alright now!'
+
 # exercise 5
 def evaluate number
   puts 'please enter a number between 0 and 100'
