@@ -1,0 +1,179 @@
+# exercise 1
+def fun_with_ids
+  a_outer = 42
+  b_outer = "forty two"
+  c_outer = [42]
+  d_outer = c_outer[0]
+# these all get assigned a new object ID
+  a_outer_id = a_outer.object_id
+  b_outer_id = b_outer.object_id
+  c_outer_id = c_outer.object_id
+  d_outer_id = d_outer.object_id
+# we store object IDs for each new var in another new var
+  puts "a_outer is #{a_outer} with an id of: #{a_outer_id} before the block."
+  puts "b_outer is #{b_outer} with an id of: #{b_outer_id} before the block."
+  puts "c_outer is #{c_outer} with an id of: #{c_outer_id} before the block."
+  puts "d_outer is #{d_outer} with an id of: #{d_outer_id} before the block.\n\n"
+
+  1.times do
+    a_outer_inner_id = a_outer.object_id
+    b_outer_inner_id = b_outer.object_id
+    c_outer_inner_id = c_outer.object_id
+    d_outer_inner_id = d_outer.object_id
+
+    puts "a_outer id was #{a_outer_id} before the block and is: #{a_outer.object_id} inside the block."
+    puts "b_outer id was #{b_outer_id} before the block and is: #{b_outer.object_id} inside the block."
+    puts "c_outer id was #{c_outer_id} before the block and is: #{c_outer.object_id} inside the block."
+    puts "d_outer id was #{d_outer_id} before the block and is: #{d_outer.object_id} inside the block.\n\n"
+# original object IDs persist when we enter the block
+    a_outer = 22
+    b_outer = "thirty three"
+    c_outer = [44]
+    d_outer = c_outer[0]
+# now our object IDs are different, because we are using old names, but referring to data that's newly-added to memory (with new IDs)
+    puts "a_outer inside after reassignment is #{a_outer} with an id of: #{a_outer_id} before and: #{a_outer.object_id} after."
+    puts "b_outer inside after reassignment is #{b_outer} with an id of: #{b_outer_id} before and: #{b_outer.object_id} after."
+    puts "c_outer inside after reassignment is #{c_outer} with an id of: #{c_outer_id} before and: #{c_outer.object_id} after."
+    puts "d_outer inside after reassignment is #{d_outer} with an id of: #{d_outer_id} before and: #{d_outer.object_id} after.\n\n"
+
+
+    a_inner = a_outer
+    b_inner = b_outer
+    c_inner = c_outer
+    d_inner = c_inner[0]
+
+    a_inner_id = a_inner.object_id
+    b_inner_id = b_inner.object_id
+    c_inner_id = c_inner.object_id
+    d_inner_id = d_inner.object_id
+
+    puts "a_inner is #{a_inner} with an id of: #{a_inner_id} inside the block (compared to #{a_outer.object_id} for outer)."
+    puts "b_inner is #{b_inner} with an id of: #{b_inner_id} inside the block (compared to #{b_outer.object_id} for outer)."
+    puts "c_inner is #{c_inner} with an id of: #{c_inner_id} inside the block (compared to #{c_outer.object_id} for outer)."
+    puts "d_inner is #{d_inner} with an id of: #{d_inner_id} inside the block (compared to #{d_outer.object_id} for outer).\n\n"
+  # these inner IDs should be the same as the new outer IDs, since they point to the same data in memory.
+  end
+
+  puts "a_outer is #{a_outer} with an id of: #{a_outer_id} BEFORE and: #{a_outer.object_id} AFTER the block."
+  puts "b_outer is #{b_outer} with an id of: #{b_outer_id} BEFORE and: #{b_outer.object_id} AFTER the block."
+  puts "c_outer is #{c_outer} with an id of: #{c_outer_id} BEFORE and: #{c_outer.object_id} AFTER the block."
+  puts "d_outer is #{d_outer} with an id of: #{d_outer_id} BEFORE and: #{d_outer.object_id} AFTER the block.\n\n"
+# as our original IDs persisted when we entered the block, our new IDs persist as we leave it.
+  puts "a_inner is #{a_inner} with an id of: #{a_inner_id} INSIDE and: #{a_inner.object_id} AFTER the block." rescue "ugh ohhhhh"
+  puts "b_inner is #{b_inner} with an id of: #{b_inner_id} INSIDE and: #{b_inner.object_id} AFTER the block." rescue "ugh ohhhhh"
+  puts "c_inner is #{c_inner} with an id of: #{c_inner_id} INSIDE and: #{c_inner.object_id} AFTER the block." rescue "ugh ohhhhh"
+  puts "d_inner is #{d_inner} with an id of: #{d_inner_id} INSIDE and: #{d_inner.object_id} AFTER the block.\n\n" rescue "ugh ohhhhh"
+# a_inner STILL does not exist outside of the block, and so an exception is thrown if we try to get inner IDs.
+end
+
+# exercise 2
+def fun_with_ids
+  a_outer = 42
+  b_outer = "forty two"
+  c_outer = [42]
+  d_outer = c_outer[0]
+
+  a_outer_id = a_outer.object_id
+  b_outer_id = b_outer.object_id
+  c_outer_id = c_outer.object_id
+  d_outer_id = d_outer.object_id
+# assign outer IDs to their own variables
+  puts "a_outer is #{a_outer} with an id of: #{a_outer_id} before the block."
+  puts "b_outer is #{b_outer} with an id of: #{b_outer_id} before the block."
+  puts "c_outer is #{c_outer} with an id of: #{c_outer_id} before the block."
+  puts "d_outer is #{d_outer} with an id of: #{d_outer_id} before the block.\n\n"
+
+  an_illustrative_method(a_outer, b_outer, c_outer, d_outer, a_outer_id, b_outer_id, c_outer_id, d_outer_id)
+
+
+  puts "a_outer is #{a_outer} with an id of: #{a_outer_id} BEFORE and: #{a_outer.object_id} AFTER the method call."
+  puts "b_outer is #{b_outer} with an id of: #{b_outer_id} BEFORE and: #{b_outer.object_id} AFTER the method call."
+  puts "c_outer is #{c_outer} with an id of: #{c_outer_id} BEFORE and: #{c_outer.object_id} AFTER the method call."
+  puts "d_outer is #{d_outer} with an id of: #{d_outer_id} BEFORE and: #{d_outer.object_id} AFTER the method call.\n\n"
+# IDs return to their original state after method call.
+  puts "a_inner is #{a_inner} with an id of: #{a_inner_id} INSIDE and: #{a_inner.object_id} AFTER the method." rescue puts "ugh ohhhhh"
+  puts "b_inner is #{b_inner} with an id of: #{b_inner_id} INSIDE and: #{b_inner.object_id} AFTER the method." rescue puts "ugh ohhhhh"
+  puts "c_inner is #{c_inner} with an id of: #{c_inner_id} INSIDE and: #{c_inner.object_id} AFTER the method." rescue puts "ugh ohhhhh"
+  puts "d_inner is #{d_inner} with an id of: #{d_inner_id} INSIDE and: #{d_inner.object_id} AFTER the method.\n\n" rescue puts "ugh ohhhhh"
+# inner IDs still don't exist outside method call.
+end
+
+
+def an_illustrative_method(a_outer, b_outer, c_outer, d_outer, a_outer_id, b_outer_id, c_outer_id, d_outer_id)
+  a_outer_inner_id = a_outer.object_id
+  b_outer_inner_id = b_outer.object_id
+  c_outer_inner_id = c_outer.object_id
+  d_outer_inner_id = d_outer.object_id
+
+  puts "a_outer id was #{a_outer_id} before the method and is: #{a_outer.object_id} inside the method."
+  puts "b_outer id was #{b_outer_id} before the method and is: #{b_outer.object_id} inside the method."
+  puts "c_outer id was #{c_outer_id} before the method and is: #{c_outer.object_id} inside the method."
+  puts "d_outer id was #{d_outer_id} before the method and is: #{d_outer.object_id} inside the method.\n\n"
+# IDs persist inside the method!
+  a_outer = 22
+  b_outer = "thirty three"
+  c_outer = [44]
+  d_outer = c_outer[0]
+
+  puts "a_outer inside after reassignment is #{a_outer} with an id of: #{a_outer_id} before and: #{a_outer.object_id} after."
+  puts "b_outer inside after reassignment is #{b_outer} with an id of: #{b_outer_id} before and: #{b_outer.object_id} after."
+  puts "c_outer inside after reassignment is #{c_outer} with an id of: #{c_outer_id} before and: #{c_outer.object_id} after."
+  puts "d_outer inside after reassignment is #{d_outer} with an id of: #{d_outer_id} before and: #{d_outer.object_id} after.\n\n"
+# reassignment will always change the IDs
+
+  a_inner = a_outer
+  b_inner = b_outer
+  c_inner = c_outer
+  d_inner = c_inner[0]
+
+  a_inner_id = a_inner.object_id
+  b_inner_id = b_inner.object_id
+  c_inner_id = c_inner.object_id
+  d_inner_id = d_inner.object_id
+
+  puts "a_inner is #{a_inner} with an id of: #{a_inner_id} inside the method (compared to #{a_outer.object_id} for outer)."
+  puts "b_inner is #{b_inner} with an id of: #{b_inner_id} inside the method (compared to #{b_outer.object_id} for outer)."
+  puts "c_inner is #{c_inner} with an id of: #{c_inner_id} inside the method (compared to #{c_outer.object_id} for outer)."
+  puts "d_inner is #{d_inner} with an id of: #{d_inner_id} inside the method (compared to #{d_outer.object_id} for outer).\n\n"
+end
+fun_with_ids
+
+
+# exercise 3
+def tricky_method(a_string_param, an_array_param)
+  a_string_param += 'rutabega'
+  an_array_param << 'rutabega'
+end
+
+my_string = 'pumpkins'
+my_array = ['pumpkins']
+tricky_method(my_string, my_array)
+
+puts "My string looks like this now: #{my_string}"
+puts "My array looks like this now: #{my_array}"
+# my_string => 'pumpkins' my_array => ['pumpkins', 'rutabega']
+# this method will output an unmodified return from my_string, and an updated/
+# mutated version of my_array. This is because << operates directly on the
+# variable my_array, while the += operator creates a new, local copy of the
+# variable my_string inside the method.
+
+# exercise 4
+def tricky_method_two(a_string_param, an_array_param)
+  a_string_param.gsub!('pumpkins', 'rutabega')
+  an_array_param = ['pumpkins', 'rutabega']
+end
+
+my_string = 'pumpkins'
+my_array = ['pumpkins']
+tricky_method_two(my_string, my_array)
+
+puts "My string look like this now: #{my_string}"
+puts "My array looks like this now: #{my_array}"
+# my_string => 'rutabega' my_array => ['pumpkins']
+
+# exercise 5
+def color_valid(color)
+  if color == 'blue' || color == 'green'
+end
+# Ruby automatically evaluates statements, so this will return true only if
+# the color param provided is either of the valid strings, 'blue' or 'green'.
